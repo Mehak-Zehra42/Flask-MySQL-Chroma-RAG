@@ -261,7 +261,12 @@ function parseMarkdown(text) {
 
     // 1. Codeblocks ```language ... ```
     html = html.replace(/```([\s\S]*?)```/g, (match, code) => {
-        return `<pre><code>${code.trim()}</code></pre>`;
+        return `
+            <div class="code-container" style="position: relative; margin-top: 10px;">
+                <button class="copy-btn btn-sm" onclick="copyToClipboard(this)"><i class="bi bi-clipboard"></i> Copy</button>
+                <pre><code>${code.trim()}</code></pre>
+            </div>
+        `;
     });
 
     // 2. Inline code `code`
@@ -301,9 +306,42 @@ function parseMarkdown(text) {
     html = html.replace(/\n/g, '<br>');
     html = html.replace(/<\/ul><br>/g, '</ul>');
     html = html.replace(/<\/pre><br>/g, '</pre>');
+    html = html.replace(/<\/div><br>/g, '</div>');
 
     return html;
 }
+
+// Global Clipboard Copy Handler
+window.copyToClipboard = function(btn) {
+    const container = btn.closest('.code-container');
+    const codeEl = container.querySelector('code');
+    const textToCopy = codeEl.innerText || codeEl.textContent;
+    
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        // Success feedback on button
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="bi bi-check-lg"></i> Copied!';
+        btn.style.color = "var(--success)";
+        btn.style.borderColor = "var(--success)";
+        
+        // Show floating copy toast
+        const toast = document.getElementById('copy-toast');
+        if (toast) {
+            toast.classList.add('show');
+        }
+        
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.color = "";
+            btn.style.borderColor = "";
+            if (toast) {
+                toast.classList.remove('show');
+            }
+        }, 1800);
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+};
 
 // --- Chat History Management ---
 async function loadChatHistory() {

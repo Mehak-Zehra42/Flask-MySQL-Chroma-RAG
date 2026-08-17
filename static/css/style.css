@@ -1,22 +1,25 @@
-/* Design System & Tokens */
+/* Design System & Premium Tokens */
 :root {
-    --bg-main: #0b0d10;
-    --bg-sidebar: #10141a;
-    --bg-card: #151a22;
-    --border-color: #212833;
+    --bg-main: #06080a;
+    --bg-sidebar: #0b0e12;
+    --bg-card: rgba(18, 22, 28, 0.7);
+    --border-color: rgba(255, 255, 255, 0.05);
+    --border-hover: rgba(255, 255, 255, 0.1);
     
     --primary: #2563eb;
     --primary-hover: #1d4ed8;
-    --primary-glow: rgba(37, 99, 235, 0.15);
+    --primary-glow: rgba(37, 99, 235, 0.2);
+    
+    --success: #10b981;
+    --success-glow: rgba(16, 185, 129, 0.15);
     
     --warning: #f59e0b;
     --warning-hover: #d97706;
     --warning-glow: rgba(245, 158, 11, 0.15);
     
     --text-white: #f8fafc;
-    --text-light-gray: #e2e8f0;
-    --text-secondary: #94a3b8;
-    --text-dark: #0f172a;
+    --text-light-gray: #cbd5e1;
+    --text-secondary: #64748b;
     
     --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -27,6 +30,7 @@ body {
     color: var(--text-light-gray);
     font-family: 'Plus Jakarta Sans', sans-serif;
     overflow-x: hidden;
+    letter-spacing: -0.01em;
 }
 
 .font-heading {
@@ -38,60 +42,72 @@ body {
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Glassmorphism & Cards */
+.glass-panel {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid var(--border-color);
+}
+
 /* Sidebar Styling */
 #sidebar {
-    width: 280px;
-    min-width: 280px;
+    width: 290px;
+    min-width: 290px;
     height: 100vh;
     position: sticky;
     top: 0;
     z-index: 100;
+    background: var(--bg-sidebar);
 }
 
 .logo-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-    background-color: var(--primary);
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--primary), #1d4ed8);
+    box-shadow: 0 4px 12px var(--primary-glow);
 }
 
-.bg-sidebar {
-    background-color: var(--bg-sidebar);
-}
-
-.bg-main {
-    background-color: var(--bg-main);
-}
-
-.bg-dark-card {
-    background-color: var(--bg-card);
-}
-
-.border-dark-subtle {
-    border-color: var(--border-color) !important;
-}
-
-/* Custom Nav Links */
+/* Sidebar Nav Links */
 .nav-link {
     transition: var(--transition-smooth);
     font-weight: 500;
+    border: 1px solid transparent;
 }
 
 .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.03);
+    background-color: rgba(255, 255, 255, 0.02);
     color: var(--text-white) !important;
 }
 
 .nav-link.active {
-    background-color: var(--primary-glow) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid var(--border-color);
     color: var(--text-white) !important;
-    border: 1px solid rgba(37, 99, 235, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Main Layout Components */
 .main-header {
     height: 75px;
-    background-color: var(--bg-sidebar);
+    background: var(--bg-sidebar);
 }
 
 .view-container {
@@ -99,46 +115,41 @@ body {
     overflow: hidden;
 }
 
-/* Chat Styles */
+/* Chat Layout */
 .chat-wrapper {
     scrollbar-width: thin;
-    scrollbar-color: var(--border-color) transparent;
 }
 
-.chat-wrapper::-webkit-scrollbar {
-    width: 6px;
-}
-
-.chat-wrapper::-webkit-scrollbar-thumb {
-    background-color: var(--border-color);
-    border-radius: 10px;
-}
-
-/* Message Bubbles */
+/* Asymmetric Message Bubbles */
 .message-bubble {
-    animation: fadeInUp 0.3s ease-out forwards;
-    max-width: 85%;
-    width: fit-content;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: bubbleAppear 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    max-width: 80%;
+    margin-bottom: 4px;
 }
 
 .bot-message {
     align-self: flex-start;
-    background-color: var(--bg-sidebar);
+    background: rgba(255, 255, 255, 0.025);
     border: 1px solid var(--border-color);
-    border-bottom-left-radius: 4px !important;
+    border-radius: 18px 18px 18px 4px !important;
 }
 
 .user-message {
     align-self: flex-end;
-    background: linear-gradient(135deg, var(--primary), #1e40af);
+    background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
     color: var(--text-white);
-    border-bottom-right-radius: 4px !important;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 18px 18px 4px 18px !important;
 }
 
 .bot-avatar {
     width: 32px;
     height: 32px;
     border-radius: 8px;
+    background: linear-gradient(135deg, #0284c7, #0369a1);
+    color: white;
     flex-shrink: 0;
 }
 
@@ -146,115 +157,152 @@ body {
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    background-color: #475569;
+    background: linear-gradient(135deg, #475569, #334155);
     color: var(--text-white);
     flex-shrink: 0;
 }
 
-/* Codeblock and Markdown styling in Chat */
+/* Markdown Rendering & Code Blocks */
 .message-content pre {
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 1rem;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    margin-top: 0.5rem;
+    background-color: #030712 !important;
+    padding: 1.2rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    margin-top: 0.75rem;
     overflow-x: auto;
+    position: relative;
 }
 
 .message-content code {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 0.2rem 0.4rem;
-    border-radius: 4px;
-    font-size: 0.9em;
-    font-family: monospace;
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 0.15rem 0.35rem;
+    border-radius: 5px;
+    font-size: 0.85em;
+    color: #f1f5f9;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .message-content pre code {
     background-color: transparent;
     padding: 0;
     border-radius: 0;
-    font-size: 0.9em;
+    font-size: 0.85em;
 }
 
-.message-content p:last-child {
-    margin-bottom: 0;
+/* Code Copy Button */
+.code-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: -4px;
 }
 
-/* Sources accordion style */
-.sources-card {
-    background-color: rgba(0, 0, 0, 0.15);
-    border: 1px solid var(--border-color);
-    font-size: 0.8rem;
-    margin-top: 8px;
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
 }
 
-/* Inputs */
-.form-control:focus {
-    background-color: var(--bg-card);
-    border-color: var(--primary);
+.copy-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
     color: var(--text-white);
-    box-shadow: 0 0 0 0.25rem var(--primary-glow);
+}
+
+/* Custom Success Toast Alert for Clipboard Copy */
+#copy-toast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    background: rgba(16, 185, 129, 0.95);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 99px;
+    font-size: 0.85rem;
+    z-index: 10000;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#copy-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Sources Accordion Card */
+.sources-card {
+    background: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid var(--border-color) !important;
+    font-size: 0.8rem;
+    margin-top: 12px;
+}
+
+.sources-card .card-header {
+    background: transparent !important;
+    border-bottom: none !important;
+}
+
+/* Focus inputs */
+.form-control {
+    box-shadow: none !important;
+    transition: var(--transition-smooth);
+}
+
+.form-control:focus {
+    background-color: var(--bg-sidebar) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: var(--text-white) !important;
 }
 
 /* Drag and Drop Zone */
 .drag-drop-zone {
     border-color: var(--border-color) !important;
+    background-color: rgba(255, 255, 255, 0.01);
     transition: var(--transition-smooth);
-    background-color: rgba(0, 0, 0, 0.05);
+    border-style: dashed !important;
 }
 
 .drag-drop-zone:hover, .drag-drop-zone.dragover {
     border-color: var(--warning) !important;
     background-color: var(--warning-glow);
-    transform: translateY(-2px);
+    transform: scale(1.005);
 }
 
 .upload-icon-container {
-    width: 60px;
-    height: 60px;
+    width: 54px;
+    height: 54px;
     border-radius: 50%;
-    background-color: rgba(245, 158, 11, 0.1);
+    background-color: rgba(245, 158, 11, 0.08);
 }
 
 .cursor-pointer {
     cursor: pointer;
 }
 
-/* System elements */
+/* Suggested pills */
 .suggested-queries button {
-    border-color: var(--border-color);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
     color: var(--text-secondary);
     transition: var(--transition-smooth);
 }
 
 .suggested-queries button:hover {
-    background-color: var(--primary);
+    background-color: rgba(37, 99, 235, 0.1);
     color: var(--text-white);
-    border-color: var(--primary);
+    border-color: rgba(37, 99, 235, 0.3);
 }
 
-/* Animations */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Tables styling */
-.table {
-    --bs-table-bg: transparent;
-    --bs-table-hover-bg: rgba(255, 255, 255, 0.02);
-}
-.table td, .table th {
-    padding: 12px 16px;
-}
-
-/* Login Page Overlay Styles */
+/* Login Page Styles */
 #login-overlay {
     background-color: var(--bg-main);
     z-index: 9999;
@@ -267,23 +315,46 @@ body {
 }
 
 .login-card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    background: rgba(18, 22, 28, 0.85);
+    backdrop-filter: blur(20px) saturate(120%);
+    -webkit-backdrop-filter: blur(20px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
 }
 
-.login-card:hover {
-    box-shadow: 0 10px 50px rgba(37, 99, 235, 0.08);
+.auth-form input {
+    background: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid var(--border-color) !important;
 }
 
 .auth-form input:focus {
-    box-shadow: 0 0 0 0.2rem var(--primary-glow) !important;
+    border-color: var(--primary) !important;
+    background: rgba(0, 0, 0, 0.3) !important;
 }
 
 #btn-logout {
     transition: var(--transition-smooth);
 }
+
 #btn-logout:hover {
-    background-color: rgba(220, 38, 38, 0.15) !important;
+    background-color: rgba(220, 38, 38, 0.1) !important;
 }
 
+/* Animations */
+@keyframes bubbleAppear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tables */
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-hover-bg: rgba(255, 255, 255, 0.015);
+}
+
+.table td, .table th {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border-color);
+}
