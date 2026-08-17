@@ -241,6 +241,36 @@ def query_rag(user_query, chat_history=None, top_k=4, stream=False):
                 "status": "error"
             }
             
+    # 0. Check for greeting bypass
+    greetings = ["hello", "hi", "hey", "aoa", "assalam", "yo", "greetings", "aslam"]
+    is_greeting = False
+    clean_query = user_query.lower().strip().replace("?", "").replace(".", "")
+    if clean_query in greetings or any(clean_query.startswith(g + " ") for g in greetings):
+        is_greeting = True
+        
+    if is_greeting:
+        greeting_text = "Hello! How can I help you with our company support or vehicles today?"
+        if stream:
+            class MockStream:
+                def __init__(self, text):
+                    self.text = text
+                def __iter__(self):
+                    class Chunk:
+                        def __init__(self, t):
+                            self.text = t
+                    yield Chunk(self.text)
+            return {
+                "stream": MockStream(greeting_text),
+                "context_used": [],
+                "status": "success"
+            }
+        else:
+            return {
+                "answer": greeting_text,
+                "context_used": [],
+                "status": "success"
+            }
+
     # 1. Embed query
     try:
         query_embedding = get_gemini_embedding(user_query, is_query=True)
@@ -264,9 +294,10 @@ def query_rag(user_query, chat_history=None, top_k=4, stream=False):
             "status": "error"
         }
         
-    # Extract matching chunks and metadata
+    # Extract matching chunks and metadata (with distance thresholding)
     contexts = []
     sources = []
+    MAX_DISTANCE_THRESHOLD = 0.8  # Semantically close matches only
     
     if search_results and search_results['documents'] and len(search_results['documents'][0]) > 0:
         for i in range(len(search_results['documents'][0])):
@@ -274,13 +305,38 @@ def query_rag(user_query, chat_history=None, top_k=4, stream=False):
             meta = search_results['metadatas'][0][i]
             dist = search_results['distances'][0][i]
             
-            contexts.append(doc_text)
-            sources.append({
-                "filename": meta['filename'],
-                "chunk": meta['chunk_index'],
-                "distance": float(dist)
-            })
+            if dist <= MAX_DISTANCE_THRESHOLD:
+                contexts.append(doc_text)
+                sources.append({
+                    "filename": meta['filename'],
+                    "chunk": meta['chunk_index'],
+                    "distance": float(dist)
+                })
             
+    # If no relevant company context matches, reject the prompt immediately
+    if not contexts:
+        not_found_msg = "I'm sorry, but I couldn't find that information in the uploaded company documents."
+        if stream:
+            class MockStream:
+                def __init__(self, text):
+                    self.text = text
+                def __iter__(self):
+                    class Chunk:
+                        def __init__(self, t):
+                            self.text = t
+                    yield Chunk(self.text)
+            return {
+                "stream": MockStream(not_found_msg),
+                "context_used": [],
+                "status": "no_context"
+            }
+        else:
+            return {
+                "answer": not_found_msg,
+                "context_used": [],
+                "status": "no_context"
+            }
+
     # 3. Construct the Augmented Prompt
     if contexts:
         context_str = "\n\n---\n\n".join(contexts)
