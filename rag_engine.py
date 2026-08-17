@@ -294,10 +294,26 @@ def query_rag(user_query, chat_history=None, top_k=4, stream=False):
             "status": "error"
         }
         
+    # List of key terms in business manual to trigger keyword bypass
+    business_keywords = {
+        "swift", "alto", "wagonr", "wagon", "suzuki", "bumper", "radiator", "fan", 
+        "spark", "plug", "plugs", "oil", "lubricant", "filter", "filters", "brake", 
+        "pads", "ceramic", "platinum", "nickel", "refund", "return", "warranty", 
+        "payment", "deposit", "net-30", "invoice", "invoicing", "claim", "claims", 
+        "obd-ii", "cvt", "transmission", "doa", "lock", "gate", "code", "manager", 
+        "kamran", "incident", "99-red", "emergency", "warehouse"
+    }
+    
+    # Check if query contains any of the business keywords
+    words_in_query = set(re.findall(r'\b\w+\b', user_query.lower()))
+    has_business_keyword = not words_in_query.isdisjoint(business_keywords)
+    
+    # Relax threshold from 0.8 to 1.25 if a keyword matches
+    max_threshold = 1.25 if has_business_keyword else 0.8
+
     # Extract matching chunks and metadata (with distance thresholding)
     contexts = []
     sources = []
-    MAX_DISTANCE_THRESHOLD = 0.8  # Semantically close matches only
     
     if search_results and search_results['documents'] and len(search_results['documents'][0]) > 0:
         for i in range(len(search_results['documents'][0])):
@@ -305,7 +321,7 @@ def query_rag(user_query, chat_history=None, top_k=4, stream=False):
             meta = search_results['metadatas'][0][i]
             dist = search_results['distances'][0][i]
             
-            if dist <= MAX_DISTANCE_THRESHOLD:
+            if dist <= max_threshold:
                 contexts.append(doc_text)
                 sources.append({
                     "filename": meta['filename'],
