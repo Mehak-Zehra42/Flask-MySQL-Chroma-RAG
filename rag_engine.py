@@ -222,7 +222,7 @@ def query_rag(user_query, chat_history=None, top_k=4, stream=False):
                 f"Answer: Answer the question politely and inform the user that no business documents have been uploaded to the database yet, so you are answering from general knowledge."
             )
             if stream:
-                response_stream = model.generate_content_stream(prompt)
+                response_stream = model.generate_content(prompt, stream=True)
                 return {
                     "stream": response_stream,
                     "context_used": [],
@@ -315,7 +315,7 @@ Answer:
             generation_config={"temperature": 0.3} # Low temperature for factual, consistent answers
         )
         if stream:
-            response_stream = model.generate_content_stream(prompt)
+            response_stream = model.generate_content(prompt, stream=True)
             return {
                 "stream": response_stream,
                 "context_used": sources,
