@@ -1,0 +1,39 @@
+========================================================================
+APEX MOTORS - INTERNAL KNOWLEDGE BASE & SYSTEM MANUAL
+Document ID: APEX-KB-2026-V3
+Classification: Internal / Confidential (Suzuki & Partner Support)
+========================================================================
+
+1. APEX MOTORS CORPORATE OVERVIEW
+Apex Motors is a certified regional partner of Suzuki vehicles, specializing in local distribution, customized spare parts logistics, and warranty claims management. Our headquarters is located in Warehouse B, Sector 4-A, Industrial Estate, Karachi.
+
+2. SERVICE AND MAINTENANCE POLICIES
+- Scheduled Maintenance: Every Suzuki vehicle serviced under Apex Motors must undergo routine inspection every 5,000 kilometers or 6 months, whichever comes first.
+- Spark Plug Replacements: Platinum spark plugs (Part #SP-9921) must be replaced every 40,000 kilometers. Standard nickel spark plugs (Part #SP-1102) must be replaced every 15,000 kilometers.
+- Engine Oil Specification: All Suzuki engines under warranty must use Apex-approved SAE 0W-20 fully synthetic engine oil. Use of non-approved lubricants voids the engine cylinder warranty automatically.
+
+3. PARTS CATALOGUE & PRICING (APEX INTERNAL)
+- Suzuki Swift Front Bumper (Part #SB-SW-902): Cost price: $110. Retail price: $185. Standard installation time is 1.5 hours.
+- Suzuki Alto Radiator Fan (Part #RF-AL-104): Cost price: $45. Retail price: $78. Warranty period: 12 months.
+- Suzuki WagonR Air Filter (Part #AF-WR-405): Cost price: $8. Retail price: $15. Recommended replacement interval: every 10,000 kilometers.
+- High-Performance Ceramic Brake Pads (Part #BP-CER-999): Retails for $120. Standard installation time: 45 minutes.
+
+4. REFUND & RETURN POLICIES
+- General Returns: Unused and undamaged spare parts in original packaging can be returned within 14 calendar days from the purchase date for a full refund. A 10% restocking fee applies to open-box returns.
+- Electrical Components: Returns of electrical parts (such as Alternators, ECM units, and Spark plugs) are strictly prohibited unless the part is proven dead-on-arrival (DOA) by an authorized Apex technician within 48 hours of purchase.
+- Special Orders: Custom ordered body parts or paint kits are non-refundable and require a non-refundable 40% deposit.
+
+5. PAYMENT AND INVOICING RULES
+- Deposit Policy: All parts orders exceeding a retail value of $500 require a minimum 30% upfront deposit before parts are dispatched from our warehouse.
+- Corporate Accounts: Authorized dealerships have a net-30 credit payment term. Payments delayed beyond 30 days are subject to a 1.5% monthly compound interest penalty.
+- Retail Purchases: We accept major credit cards, bank transfers, and secure mobile checkout. Cash-on-delivery (COD) is restricted to orders below $100.
+
+6. WARRANTY CLAIMS PROCEDURES
+- Warranty Registration: A Suzuki warranty claim is valid only if registered in the Apex portal within 10 days of vehicle delivery.
+- Transmission Defect Claims: Any issues with the automatic CVT transmission unit must be diagnosed using the Apex OBD-II Scan tool. The resulting diagnostics log (log format .DAT) must be uploaded along with the claim form.
+- Turnaround Time: Parts replacements under warranty are processed within 5 to 7 business days, depending on parts availability in Warehouse B.
+
+7. EMERGENCY ACCESS & SAFETY CODES
+- Gate Security Access: The emergency lock code for the Suzuki spare parts warehouse gate is 5522-XYZ.
+- Store Manager Contact: The current store manager is Mr. Kamran Ali (Contact ID: APEX-MGR-99). Emergency contact number: 555-0199.
+- Incident Reporting: In case of warehouse fire or security breach, staff must dial emergency code 99-RED on the internal intercom system.

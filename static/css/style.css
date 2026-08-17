@@ -1,0 +1,289 @@
+/* Design System & Tokens */
+:root {
+    --bg-main: #0b0d10;
+    --bg-sidebar: #10141a;
+    --bg-card: #151a22;
+    --border-color: #212833;
+    
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --primary-glow: rgba(37, 99, 235, 0.15);
+    
+    --warning: #f59e0b;
+    --warning-hover: #d97706;
+    --warning-glow: rgba(245, 158, 11, 0.15);
+    
+    --text-white: #f8fafc;
+    --text-light-gray: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-dark: #0f172a;
+    
+    --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Styles */
+body {
+    background-color: var(--bg-main);
+    color: var(--text-light-gray);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+}
+
+.font-heading {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+}
+
+.font-sans {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Sidebar Styling */
+#sidebar {
+    width: 280px;
+    min-width: 280px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background-color: var(--primary);
+}
+
+.bg-sidebar {
+    background-color: var(--bg-sidebar);
+}
+
+.bg-main {
+    background-color: var(--bg-main);
+}
+
+.bg-dark-card {
+    background-color: var(--bg-card);
+}
+
+.border-dark-subtle {
+    border-color: var(--border-color) !important;
+}
+
+/* Custom Nav Links */
+.nav-link {
+    transition: var(--transition-smooth);
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+    color: var(--text-white) !important;
+}
+
+.nav-link.active {
+    background-color: var(--primary-glow) !important;
+    color: var(--text-white) !important;
+    border: 1px solid rgba(37, 99, 235, 0.3);
+}
+
+/* Main Layout Components */
+.main-header {
+    height: 75px;
+    background-color: var(--bg-sidebar);
+}
+
+.view-container {
+    height: calc(100vh - 75px);
+    overflow: hidden;
+}
+
+/* Chat Styles */
+.chat-wrapper {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
+}
+
+.chat-wrapper::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-wrapper::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 10px;
+}
+
+/* Message Bubbles */
+.message-bubble {
+    animation: fadeInUp 0.3s ease-out forwards;
+    max-width: 85%;
+    width: fit-content;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background-color: var(--bg-sidebar);
+    border: 1px solid var(--border-color);
+    border-bottom-left-radius: 4px !important;
+}
+
+.user-message {
+    align-self: flex-end;
+    background: linear-gradient(135deg, var(--primary), #1e40af);
+    color: var(--text-white);
+    border-bottom-right-radius: 4px !important;
+}
+
+.bot-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background-color: #475569;
+    color: var(--text-white);
+    flex-shrink: 0;
+}
+
+/* Codeblock and Markdown styling in Chat */
+.message-content pre {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-top: 0.5rem;
+    overflow-x: auto;
+}
+
+.message-content code {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: monospace;
+}
+
+.message-content pre code {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: 0.9em;
+}
+
+.message-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Sources accordion style */
+.sources-card {
+    background-color: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-color);
+    font-size: 0.8rem;
+    margin-top: 8px;
+}
+
+/* Inputs */
+.form-control:focus {
+    background-color: var(--bg-card);
+    border-color: var(--primary);
+    color: var(--text-white);
+    box-shadow: 0 0 0 0.25rem var(--primary-glow);
+}
+
+/* Drag and Drop Zone */
+.drag-drop-zone {
+    border-color: var(--border-color) !important;
+    transition: var(--transition-smooth);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.drag-drop-zone:hover, .drag-drop-zone.dragover {
+    border-color: var(--warning) !important;
+    background-color: var(--warning-glow);
+    transform: translateY(-2px);
+}
+
+.upload-icon-container {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(245, 158, 11, 0.1);
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* System elements */
+.suggested-queries button {
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+    transition: var(--transition-smooth);
+}
+
+.suggested-queries button:hover {
+    background-color: var(--primary);
+    color: var(--text-white);
+    border-color: var(--primary);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tables styling */
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-hover-bg: rgba(255, 255, 255, 0.02);
+}
+.table td, .table th {
+    padding: 12px 16px;
+}
+
+/* Login Page Overlay Styles */
+#login-overlay {
+    background-color: var(--bg-main);
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: var(--transition-smooth);
+}
+
+.login-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.login-card:hover {
+    box-shadow: 0 10px 50px rgba(37, 99, 235, 0.08);
+}
+
+.auth-form input:focus {
+    box-shadow: 0 0 0 0.2rem var(--primary-glow) !important;
+}
+
+#btn-logout {
+    transition: var(--transition-smooth);
+}
+#btn-logout:hover {
+    background-color: rgba(220, 38, 38, 0.15) !important;
+}
+

@@ -1,0 +1,6 @@
+flask
+python-dotenv
+chromadb
+google-generativeai
+pypdf
+mysql-connector-python
