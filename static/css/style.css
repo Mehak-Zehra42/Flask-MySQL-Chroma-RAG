@@ -66,6 +66,24 @@ body {
     border: 1px solid var(--border-color);
 }
 
+.bg-dark-card {
+    background-color: var(--bg-card) !important;
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-light-gray) !important;
+}
+
+.bg-main {
+    background-color: var(--bg-main) !important;
+}
+
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-light-gray);
+}
+
 /* Sidebar Styling */
 #sidebar {
     width: 290px;
