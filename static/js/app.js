@@ -13,6 +13,7 @@ const userEmailDisplay = document.getElementById('user-email-display');
 const userRoleDisplay = document.getElementById('user-role-display');
 const btnLogout = document.getElementById('btn-logout');
 const adminNavItem = document.getElementById('admin-nav-item');
+const chatNavItem = document.getElementById('chat-nav-item');
 const sidebarFilesStatus = document.getElementById('sidebar-files-status');
 
 // DOM Elements - App Views
@@ -100,10 +101,12 @@ async function checkSession() {
             // Role-based visibility
             if (currentUser.role === 'admin') {
                 adminNavItem.classList.remove('d-none');
+                chatNavItem.classList.add('d-none');
                 sidebarFilesStatus.classList.remove('d-none');
-                loadDocuments();
+                toggleView('admin'); // Force admins to stay in Ingestion view
             } else {
                 adminNavItem.classList.add('d-none');
+                chatNavItem.classList.remove('d-none');
                 sidebarFilesStatus.classList.add('d-none');
                 toggleView('chat'); // Force regular users to stay in chat view
             }
